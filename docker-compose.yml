@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    image: "snakeliwei/docker-alpine-nginx:edge"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./mysite:/etc/nginx/sites-enabled/mysite
+      - ./ssl:/ssl
+      - ./www:/www
+    links:
+      - "v2ray"
+  v2ray:
+    image: "v2ray/official"
+    volumes:
+      - ./config.json:/etc/v2ray/config.json
